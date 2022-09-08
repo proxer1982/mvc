@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <!-- Comentario  -->
     <meta charset="UTF-8">
     <title>Initio</title>
 </head>
 <body>
     <h1>Inicio</h1>
-<p>Este es el contenido del index</p>
+    <p th:text="${mensaje}"></p>
+    <ul>
+        <li><a th:href="@{/usuarios/list}">Usuarios</a></li>
+        <li><a >Empresas</a></li>
+        <li><a >Movimientos</a></li>
+    </ul>
 </body>
 </html>
