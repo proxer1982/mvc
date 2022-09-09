@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Datos del usuario</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/usuarios/modificar}">Nuevo usuario</a></li>
+            </ul>
+        </div>
+        <div class="col-8">
+            <h1>Datos del Usuario</h1>
+            <form method="post" th:action="@{/usuarios/guardar}" th:object="${usuario}">
+                <div>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" th:field="*{nombre}" />
+                </div>
+                <div>
+                    <label for="apellido">Apellido</label>
+                    <input type="text" name="apellido" th:field="*{apellido}" />
+                </div>
+                <div>
+                    <label for="rol"></label>
+                    <select name="rol" id="rol">
+                        <option>Seleccione el rol</option>
+                        <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:text="${rol.descripcion}"></option>
+                    </select>
+                </div>
+                <br>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
