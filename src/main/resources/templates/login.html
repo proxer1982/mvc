@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla :: head"></head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="layout/plantilla :: header"></div>
+        <section th:replace="layout/plantilla :: main-index"></section>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title">
+                            Login
+                        </h1>
+                        <form method="post" th:action="@{/login}">
+                            <label for="for=username">Usuario</label>
+                            <input name="username" type="text" id="username">
+                            <br>
+                            <label for="password">Contraseña</label>
+                            <input name="password" type="text" id="username">
+                            <br>
+                            <input type="submit" value="Ingresar">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </div>
+</div>
+</body>
+</html>

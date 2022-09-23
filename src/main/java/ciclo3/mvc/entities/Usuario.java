@@ -25,6 +25,9 @@ public class Usuario {
     @Column(name = "correo", nullable = false)
     private String correo;
     @javax.validation.constraints.NotEmpty
+    @Column(name = "username")
+    private String username;
+    @javax.validation.constraints.NotEmpty
     @Column(name = "pass", nullable = false)
     private String pass;
     @ManyToOne
@@ -36,6 +39,14 @@ public class Usuario {
     private boolean estado;
 
     public Usuario() {
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Perfil getPerfil() {
@@ -127,6 +138,7 @@ public class Usuario {
                 ", tipoDocumento=" + tipoDocumento +
                 ", cedula='" + cedula + '\'' +
                 ", correo='" + correo + '\'' +
+                ", username='" + username + '\'' +
                 ", pass='" + pass + '\'' +
                 ", rol=" + rol +
                 ", perfil=" + perfil +

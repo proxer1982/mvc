@@ -1,25 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Lista de usuarios</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/plantilla :: head"></head>
 <body>
-<h1>Lista de usuarios</h1>
-<table border="1">
-  <tr>
-    <th>Nombre</th>
-    <th>Apellido</th>
-    <th>Editar</th>
-    <th>Eliminar</th>
-  </tr>
-  <tr th:each="usuario : ${usuarios}" th:if="${usuario.estado}">
-    <td th:text="${usuario.nombre}"></td>
-    <td th:text="${usuario.apellido}"></td>
-    <td><a th:href="@{/editar/} + ${usuario.idUsuario}" th:text="Editar"></a></td>
-    <td><a th:href="@{/eliminar/} + ${usuario.idUsuario}" th:text="Eliminar"></a></td>
-  </tr>
-</table>
+<div class="row">
+  <div th:replace="layout/plantilla :: header"></div>
+  <section th:replace="layout/plantilla :: main-index"></section>
+</div>
+
+<div class="container">
+  <div class="col">
+    <h1>Lista de usuarios</h1><a class="ms-auto mb-4 btn btn-primary" th:href="@{/usuarios/modificar}">Crear nuevo usuario</a>
+  </div>
+
+  <div class="card" th:if="${usuarios != null and !usuarios.empty}">
+    <table class="table">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Correo</th>
+        <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+        <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+      </tr>
+      <tr th:each="usuario, contador : ${usuarios}" th:if="${usuario.estado}">
+        <td th:text="${contador.count}"></td>
+        <td th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></td>
+        <td th:text="${usuario.correo}"></td>
+        <td  sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/editar/} + ${usuario.idUsuario}" ><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+        <td  sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/eliminar/} + ${usuario.idUsuario}" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+      </tr>
+    </table>
+  </div>
+  <div class="card" th:if="${usuarios == null or usuarios.empty}">
+    No hay elementos en la lista
+  </div>
+</div>
+
+
 
 </body>
 </html>
